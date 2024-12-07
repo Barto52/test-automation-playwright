@@ -1,3 +1,4 @@
+import {UserData} from '@_src/interfaces/userData.interface';
 import {fakerPL} from '@faker-js/faker';
 
 export function generateFirstName(): string {
@@ -21,4 +22,18 @@ export function generateUserBirthDate(): string {
 
 export function generateUserPassword(): string {
     return fakerPL.internet.password({length: 15});
+}
+
+export function generateUserData(): UserData {
+    const firstName = generateFirstName();
+    const lastName = generateLastName();
+
+    const userData = {
+        userFirstName: firstName,
+        userLastName: lastName,
+        userEmail: generateEmail(firstName, lastName),
+        userBirthDate: generateUserBirthDate(),
+        userPassword: generateUserPassword(),
+    };
+    return userData;
 }
