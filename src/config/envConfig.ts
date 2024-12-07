@@ -1,4 +1,4 @@
-import {EnvConfig} from '@_src/interfaces/envConfig';
+import {EnvConfig} from '@_src/interfaces/envConfig.interface';
 
 const envConfig: EnvConfig = {
     URL: {
