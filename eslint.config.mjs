@@ -1,5 +1,4 @@
 import pluginJs from '@eslint/js';
-
 import eslintPluginPlaywright from 'eslint-plugin-playwright';
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 import globals from 'globals';
@@ -14,6 +13,7 @@ export default [
     {
         rules: {
             'no-console': warn,
+            'max-len': ['error', {code: 150}],
         },
     },
     ...tseslint.configs.recommended,
