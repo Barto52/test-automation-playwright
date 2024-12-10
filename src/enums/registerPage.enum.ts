@@ -5,5 +5,5 @@ export enum RegisterPageEnum {
     LastNameLabel = 'Enter User Last Name',
     PageLabel = 'Register',
     PasswordLabel = 'Enter Password',
-    RegisterButtonLabel = 'Register',
+    formRegisterButtonLabel = 'Register',
 }
