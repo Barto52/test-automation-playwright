@@ -17,8 +17,9 @@ export class CommonFlow {
 
     async gotoRegisterPage(): Promise<void> {
         await this.commonPage.userDropdown.click();
+        await this.commonPage.userDropdown.waitFor({state: 'visible'});
         await expect(this.commonPage.userDropdownContent).toBeVisible();
-        await this.commonPage.registerButton.click();
+        await this.commonPage.formRegisterButton.click();
         await expect(this.page).toHaveURL(envConfig.URL.registerURL);
     }
 }
