@@ -5,6 +5,7 @@ export class RegisterPage {
 
     //Buttons//
     formRegisterButton = this.page.locator('[data-testid="register-button"]');
+    calendarDoneButton = this.page.locator('.ui-datepicker-close');
 
     //Dropdowns//
     avatarSelectionDropdown = this.page.locator('select#avatar ');
@@ -21,4 +22,7 @@ export class RegisterPage {
 
     //Labels//
     pageLabel = this.page.locator("form[id='registerForm'] div h2");
+
+    //Popups//
+    alertPopup = this.page.locator('[data-testid="alert-popup"]');
 }
