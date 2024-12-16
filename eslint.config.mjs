@@ -1,8 +1,8 @@
-import globals from 'globals';
 import pluginJs from '@eslint/js';
-import tseslint from 'typescript-eslint';
-import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 import eslintPluginPlaywright from 'eslint-plugin-playwright';
+import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
+import globals from 'globals';
+import tseslint from 'typescript-eslint';
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
@@ -13,6 +13,7 @@ export default [
     {
         rules: {
             'no-console': warn,
+            'max-len': ['error', {code: 150}],
         },
     },
     ...tseslint.configs.recommended,
