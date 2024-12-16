@@ -1,5 +1,6 @@
 export interface URLConfig {
     homepageURL: string;
+    loginURL: string;
     registerURL: string;
 }
 
