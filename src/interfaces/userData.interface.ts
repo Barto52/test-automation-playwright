@@ -1,7 +1,7 @@
-export interface UserData {
-    userFirstName: string;
-    userLastName: string;
-    userEmail: string;
-    userBirthDate: string;
-    userPassword: string;
+export interface UserDataInterface {
+    firstName: string;
+    lastName: string;
+    email: string;
+    birthDate: string;
+    password: string;
 }
