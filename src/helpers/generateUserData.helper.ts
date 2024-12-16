@@ -13,7 +13,7 @@ export function generateLastName(): string {
     return getNormalizedString(lastName);
 }
 
-export function generateEmail(userFirstName, userLastName): string {
+export function generateEmail(userFirstName: string, userLastName: string): string {
     const userEmail = fakerPL.internet.email({
         firstName: userFirstName,
         lastName: userLastName,
