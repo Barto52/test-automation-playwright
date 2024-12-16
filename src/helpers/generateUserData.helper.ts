@@ -1,23 +1,28 @@
-import {UserData} from '@_src/interfaces/userData.interface';
+import {getNormalizedString} from './getNormalizedStrings.helper';
 import {fakerPL} from '@faker-js/faker';
 
+import {UserData} from '@_src/interfaces/userData.interface';
+
 export function generateFirstName(): string {
-    return fakerPL.person.firstName();
+    const firstName = fakerPL.person.firstName();
+    return getNormalizedString(firstName);
 }
 
 export function generateLastName(): string {
-    return fakerPL.person.lastName();
+    const lastName = fakerPL.person.lastName();
+    return getNormalizedString(lastName);
 }
 
 export function generateEmail(userFirstName, userLastName): string {
-    return fakerPL.internet.email({
+    const userEmail = fakerPL.internet.email({
         firstName: userFirstName,
         lastName: userLastName,
     });
+    return getNormalizedString(userEmail);
 }
 
 export function generateUserBirthDate(): string {
-    return fakerPL.date.birthdate({mode: 'age', min: 18, max: 99}).toString();
+    return fakerPL.date.birthdate({mode: 'age', min: 18, max: 99}).toISOString().split('T')[0];
 }
 
 export function generateUserPassword(): string {
