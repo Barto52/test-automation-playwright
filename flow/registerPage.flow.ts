@@ -28,23 +28,23 @@ export class RegisterPageFlow {
         const inputsLabels = [
             {
                 input: this.registerPage.userFirstNameInput,
-                label: RegisterPageEnum.FirstNameLabel,
+                label: RegisterPageEnum.FirstNameInputLabel,
             },
             {
                 input: this.registerPage.userLastNameInput,
-                label: RegisterPageEnum.LastNameLabel,
+                label: RegisterPageEnum.LastNameInputLabel,
             },
             {
                 input: this.registerPage.userEmailInput,
-                label: RegisterPageEnum.EmailLabel,
+                label: RegisterPageEnum.EmailInputLabel,
             },
             {
                 input: this.registerPage.userBirthdateInput,
-                label: RegisterPageEnum.BirthDateLabel,
+                label: RegisterPageEnum.BirthDateInputLabel,
             },
             {
                 input: this.registerPage.userPasswordInput,
-                label: RegisterPageEnum.PasswordLabel,
+                label: RegisterPageEnum.PasswordInputLabel,
             },
         ];
 
@@ -83,7 +83,7 @@ export class RegisterPageFlow {
     async verifyRegisterButtonVisibilityAndText(): Promise<void> {
         await expect(this.registerPage.formRegisterButton).toBeVisible();
         await expect(this.registerPage.formRegisterButton).toBeEnabled();
-        await expect(this.registerPage.formRegisterButton).toHaveText(RegisterPageEnum.FormRegisterButtonLabel);
+        await expect(this.registerPage.formRegisterButton).toHaveText(RegisterPageEnum.RegisterButtonLabel);
     }
 
     async verifyRegisterPopupVisibilityAndText(): Promise<void> {
