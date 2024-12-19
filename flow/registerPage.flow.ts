@@ -17,6 +17,7 @@ export class RegisterPageFlow {
         await this.verifyInputsAndPlaceholders();
         await this.verifyAvatarVisibilityAndSize();
         await this.verifyDropdownVisibility();
+        await this.verifyRegisterButtonVisibilityAndText();
     }
 
     async verifyPageLabelVisibilityAndContent(): Promise<void> {

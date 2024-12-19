@@ -19,7 +19,6 @@ test.describe('Register a new user', () => {
         await registerPageFlow.verifyPageLabelsAndElements();
         await registerPageFlow.fillRegistrationForm(userData);
         await registerPageFlow.setRandomAvatarId();
-        await registerPageFlow.verifyRegisterButtonVisibilityAndText();
         await registerPage.formRegisterButton.click();
         await registerPageFlow.verifyRegisterPopupVisibilityAndText();
         await page.waitForURL(envConfig.URL.loginURL);
