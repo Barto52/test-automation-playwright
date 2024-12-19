@@ -4,8 +4,8 @@ export class CommonPage {
     constructor(private page: Page) {}
 
     //Buttons//
-    loginButton = this.page.locator('#loginBtn');
-    formRegisterButton = this.page.locator('#registerBtn');
+    userDropdownLoginButton = this.page.locator('#loginBtn');
+    userDropdownRegisterButton = this.page.locator('#registerBtn');
 
     //Dropdowns//
     userDropdown = this.page.locator('[data-testid="user-dropdown"]');

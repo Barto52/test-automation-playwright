@@ -82,9 +82,9 @@ export class RegisterPageFlow {
     }
 
     async verifyRegisterButtonVisibilityAndText(): Promise<void> {
-        await expect(this.registerPage.formRegisterButton).toBeVisible();
-        await expect(this.registerPage.formRegisterButton).toBeEnabled();
-        await expect(this.registerPage.formRegisterButton).toHaveText(RegisterPageEnum.RegisterButtonLabel);
+        await expect(this.registerPage.registerButton).toBeVisible();
+        await expect(this.registerPage.registerButton).toBeEnabled();
+        await expect(this.registerPage.registerButton).toHaveText(RegisterPageEnum.RegisterButtonLabel);
     }
 
     async verifyRegisterPopupVisibilityAndText(): Promise<void> {

@@ -4,7 +4,7 @@ export class LoginPage {
     constructor(private page: Page) {}
 
     //Buttons//
-    loginButton = this.page.locator('#loginButton');
+    loginButton = this.page.locator('#userDropdownLoginButton');
     //Checkboxes//
     keepMeSignInCheckbox = this.page.locator('#keepSignIn');
 

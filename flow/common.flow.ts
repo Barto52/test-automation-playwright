@@ -15,11 +15,19 @@ export class CommonFlow {
         await expect(this.page).toHaveURL(envConfig.URL.homepageURL);
     }
 
-    async gotoRegisterPage(): Promise<void> {
+    async gotoRegisterPageFromHeaderDropdown(): Promise<void> {
         await this.commonPage.userDropdown.click();
         await this.commonPage.userDropdown.waitFor({state: 'visible'});
         await expect(this.commonPage.userDropdownContent).toBeVisible();
-        await this.commonPage.formRegisterButton.click();
+        await this.commonPage.userDropdownRegisterButton.click();
         await expect(this.page).toHaveURL(envConfig.URL.registerURL);
+    }
+
+    async gotoLoginPageFromHeaderDropdown(): Promise<void> {
+        await this.commonPage.userDropdown.click();
+        await this.commonPage.userDropdown.waitFor({state: 'visible'});
+        await expect(this.commonPage.userDropdownContent).toBeVisible();
+        await this.commonPage.userDropdownLoginButton.click();
+        await expect(this.page).toHaveURL(envConfig.URL.loginURL);
     }
 }
