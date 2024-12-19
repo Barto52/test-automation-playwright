@@ -3,6 +3,7 @@ import {fakerPL} from '@faker-js/faker';
 
 import {UserDataInterface} from '@_src/interfaces/userData.interface';
 
+//TODO: move to factory
 export function generateFirstName(): string {
     const firstName = fakerPL.person.firstName();
     return getNormalizedString(firstName);

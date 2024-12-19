@@ -4,7 +4,7 @@ export class RegisterPage {
     constructor(private page: Page) {}
 
     //Buttons//
-    formRegisterButton = this.page.locator('[data-testid="register-button"]');
+    registerButton = this.page.locator('[data-testid="register-button"]');
     calendarDoneButton = this.page.locator('.ui-datepicker-close');
 
     //Dropdowns//

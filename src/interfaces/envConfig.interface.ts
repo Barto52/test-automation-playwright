@@ -1,4 +1,5 @@
 export interface URLConfig {
+    accountURL: string;
     homepageURL: string;
     loginURL: string;
     registerURL: string;
