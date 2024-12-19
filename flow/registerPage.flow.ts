@@ -74,11 +74,21 @@ export class RegisterPageFlow {
     }
     async fillRegistrationForm(userData: UserDataInterface): Promise<void> {
         await this.registerPage.userFirstNameInput.fill(userData.firstName);
+        await expect(this.registerPage.userFirstNameInput).toHaveValue(userData.firstName);
+
         await this.registerPage.userLastNameInput.fill(userData.lastName);
+        await expect(this.registerPage.userLastNameInput).toHaveValue(userData.lastName);
+
         await this.registerPage.userEmailInput.fill(userData.email);
+        await expect(this.registerPage.userEmailInput).toHaveValue(userData.email);
+
         await this.registerPage.userBirthdateInput.fill(userData.birthDate);
+        await expect(this.registerPage.userBirthdateInput).toHaveValue(userData.birthDate);
+
         await this.registerPage.calendarDoneButton.click();
+
         await this.registerPage.userPasswordInput.fill(userData.password);
+        await expect(this.registerPage.userPasswordInput).toHaveValue(userData.password);
     }
 
     async verifyRegisterButtonVisibilityAndText(): Promise<void> {

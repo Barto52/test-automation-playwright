@@ -1,7 +1,7 @@
 export interface UserDataInterface {
-    firstName: string;
-    lastName: string;
+    firstName?: string;
+    lastName?: string;
     email: string;
-    birthDate: string;
+    birthDate?: string;
     password: string;
 }

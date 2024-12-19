@@ -12,6 +12,7 @@ export class CommonFlow {
 
     async gotoHomepage(): Promise<void> {
         await this.page.goto(envConfig.URL.homepageURL);
+        await this.page.waitForLoadState('load');
         await expect(this.page).toHaveURL(envConfig.URL.homepageURL);
     }
 
