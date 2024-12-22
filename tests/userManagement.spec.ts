@@ -12,7 +12,7 @@ import {generateUserData} from '@_src/helpers/generateUserData.helper';
 test.describe('User Management', () => {
     const userData = generateUserData();
 
-    test('Registers a new user via UI', async ({page}) => {
+    test('Registers a new user via UI', {tag: ['@e2e', '@userManagement']}, async ({page}) => {
         const registerPage = new RegisterPage(page);
         const commonFlow = new CommonFlow(page);
         const registerPageFlow = new RegisterPageFlow(page);
@@ -28,7 +28,7 @@ test.describe('User Management', () => {
         await expect(page).toHaveURL(envConfig.URL.loginURL);
     });
 
-    test('Log in with a new user account', async ({page}) => {
+    test('Log in with a new user account', {tag: ['@e2e', '@userManagement']}, async ({page}) => {
         const loginPageFlow = new LoginPageFlow(page);
         const commonFlow = new CommonFlow(page);
         const loginPage = new LoginPage(page);
