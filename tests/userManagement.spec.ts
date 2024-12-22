@@ -7,10 +7,11 @@ import {RegisterPageFlow} from '@_flow/registerPage.flow';
 import {LoginPage} from '@_pages/login.page';
 import {RegisterPage} from '@_pages/register.page';
 import envConfig from '@_src/config/envConfig';
-import {generateUserData} from '@_src/helpers/generateUserData.helper';
+import {UserDataFactory} from '@_src/factory/generateUserData.factory';
 
 test.describe('User Management', () => {
-    const userData = generateUserData();
+    const userDataFactory = new UserDataFactory();
+    const userData = userDataFactory.generateUserData();
 
     test('Registers a new user via UI', {tag: ['@e2e', '@userManagement']}, async ({page}) => {
         const registerPage = new RegisterPage(page);
