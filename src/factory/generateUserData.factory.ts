@@ -1,6 +1,6 @@
 import {fakerPL} from '@faker-js/faker';
 
-import {getNormalizedString} from '@_src/helpers/getNormalizedStrings.helper';
+import {getNormalizedString} from '@_src/helpers/getNormalizedString.helper';
 import {UserDataInterface} from '@_src/interfaces/userData.interface';
 
 export class UserDataFactory {
