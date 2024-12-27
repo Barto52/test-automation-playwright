@@ -6,7 +6,9 @@ export interface URLConfig {
 }
 
 export interface APIConfig {
+    loginUserAPI: string;
     deleteUserAPI: string;
+    getUserAPI: string;
 }
 
 export interface EnvConfig {
