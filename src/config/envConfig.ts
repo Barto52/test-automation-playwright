@@ -9,7 +9,7 @@ const envConfig: EnvConfig = {
     },
     API: {
         loginUserAPI: 'http://localhost:3000/api/login',
-        deleteUserAPI: 'http://localhost:3000/api/users/{id}',
+        deleteUserAPI: 'http://localhost:3000/api/users/{{id}}',
         verifyUserExistsAPI: 'http://localhost:3000/api/users/{{id}}',
     },
 };
