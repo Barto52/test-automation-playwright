@@ -5,8 +5,9 @@ import {CommonFlow} from '@_flow/common.flow';
 import {LoginPageFlow} from '@_flow/loginPage.flow';
 import {RegisterPageFlow} from '@_flow/registerPage.flow';
 import {UserDataFactory} from '@_src/factory/generateUserData.factory';
+import {authenticateAndGetBearerToken, checkIfUserExistsByID, deleteUserWithAPI} from '@_src/helpers/api.helper';
 
-test.describe('User Management', () => {
+test.describe('User Management', {tag: '@userManagement'}, () => {
     const userDataFactory = new UserDataFactory();
     const userData = userDataFactory.generateUserData();
     let userID;
@@ -23,7 +24,7 @@ test.describe('User Management', () => {
         await registerPageFlow.submitRegisterForm();
     });
 
-    test('Log in with a new user account', {tag: ['@e2e', '@userManagement']}, async ({page}) => {
+    test('Login with a registered user', {tag: ['@e2e', '@userManagement']}, async ({page}) => {
         const loginPageFlow = new LoginPageFlow(page);
         const commonFlow = new CommonFlow(page);
         const accountPageFlow = new AccountPageFlow(page);
@@ -37,5 +38,10 @@ test.describe('User Management', () => {
 
         userID = await accountPageFlow.gotoMyProfileAndGetUserID();
         await accountPageFlow.verifyUserIDInURL(userID);
+    });
+    test('Delete registered user with API', {tag: ['@api', '@userManagement']}, async ({}) => {
+        const bearerToken = await authenticateAndGetBearerToken(userData);
+        await checkIfUserExistsByID(userID);
+        await deleteUserWithAPI(userID, bearerToken);
     });
 });
