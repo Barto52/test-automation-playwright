@@ -1,6 +1,7 @@
 import {Page, expect} from '@playwright/test';
 
 import {RegisterPage} from '@_pages/register.page';
+import envConfig from '@_src/config/envConfig';
 import {RegisterPageEnum} from '@_src/enums/registerPage.enum';
 import {getRandomAvatarId} from '@_src/helpers/getRandomValue.helper';
 import {UserDataInterface} from '@_src/interfaces/userData.interface';
@@ -97,8 +98,11 @@ export class RegisterPageFlow {
         await expect(this.registerPage.registerButton).toHaveText(RegisterPageEnum.RegisterButtonLabel);
     }
 
-    async verifyRegisterPopupVisibilityAndText(): Promise<void> {
+    async submitRegisterForm(): Promise<void> {
+        await this.registerPage.registerButton.click();
         await expect(this.registerPage.alertPopup).toBeVisible();
         await expect(this.registerPage.alertPopup).toHaveText(RegisterPageEnum.AlertPopupLabel);
+        await this.page.waitForURL(envConfig.URL.loginURL);
+        await expect(this.page).toHaveURL(envConfig.URL.loginURL);
     }
 }

@@ -8,7 +8,9 @@ const envConfig: EnvConfig = {
         registerURL: 'http://localhost:3000/register.html',
     },
     API: {
-        deleteUserAPI: 'http://localhost:3000/api/users/{id}',
+        loginUserAPI: 'http://localhost:3000/api/login',
+        deleteUserAPI: 'http://localhost:3000/api/users/{{id}}',
+        verifyUserExistsAPI: 'http://localhost:3000/api/users/{{id}}',
     },
 };
 

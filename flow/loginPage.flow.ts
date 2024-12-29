@@ -2,7 +2,8 @@ import {Page, expect} from '@playwright/test';
 
 import {LoginPage} from '@_pages/login.page';
 import {LoginPageEnum} from '@_src/enums/loginPage.enum';
-import { UserDataInterface } from '@_src/interfaces/userData.interface';
+import {UserDataInterface} from '@_src/interfaces/userData.interface';
+import envConfig from '@_src/config/envConfig';
 
 export class LoginPageFlow {
     private loginPage: LoginPage;
@@ -50,9 +51,14 @@ export class LoginPageFlow {
         await expect(this.loginPage.loginButton).toHaveText(LoginPageEnum.LoginButtonLabel);
     }
 
-     async fillLoginForm(userData: UserDataInterface): Promise<void> {
-           await this.loginPage.userEmailInput.fill(userData.email)
-           await this.loginPage.userPasswordInput.fill(userData.password)
-        }
-     
+    async fillLoginForm(userData: UserDataInterface): Promise<void> {
+        await this.loginPage.userEmailInput.fill(userData.email);
+        await this.loginPage.userPasswordInput.fill(userData.password);
+    }
+
+    async submitLoginForm(): Promise<void> {
+        await this.loginPage.loginButton.click()
+        await this.page.waitForURL(envConfig.URL.accountURL);
+        await expect(this.page).toHaveURL(envConfig.URL.accountURL);
+    }
 }
