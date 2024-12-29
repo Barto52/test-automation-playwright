@@ -10,7 +10,25 @@ import {authenticateAndGetBearerToken, checkIfUserExistsByID, deleteUserWithAPI}
 test.describe('User Management', {tag: '@userManagement'}, () => {
     const userDataFactory = new UserDataFactory();
     const userData = userDataFactory.generateUserData();
-    let userID;
+
+    test.afterAll(async () => {
+        if (!userData.id) {
+            console.info(`User does not exist, skipping "afterAll" cleanup.`);
+        }
+
+        try {
+            const bearerToken = await authenticateAndGetBearerToken(userData);
+            const userExists = await checkIfUserExistsByID(userData);
+            if (userExists) {
+                console.info(`User ${userData.id} exists, cleaning up.`);
+                await deleteUserWithAPI(userData, bearerToken);
+            } else {
+                console.info(`User ${userData.id} does not exist, skipping "afterAll" cleanup.`);
+            }
+        } catch (error) {
+            console.error(`Error during cleanup for user ${userData.id}:`, error);
+        }
+    });
 
     test('Registers a new user via UI', {tag: ['@e2e', '@userManagement']}, async ({page}) => {
         const commonFlow = new CommonFlow(page);
@@ -36,12 +54,13 @@ test.describe('User Management', {tag: '@userManagement'}, () => {
         await loginPageFlow.submitLoginForm();
         await accountPageFlow.verifyPageLabelVisibilityAndContent(userData);
 
-        userID = await accountPageFlow.gotoMyProfileAndGetUserID();
-        await accountPageFlow.verifyUserIDInURL(userID);
+        await accountPageFlow.gotoMyProfileAndGetUserID(userData);
+        await accountPageFlow.verifyUserIDInURL(userData.id);
     });
     test('Delete registered user with API', {tag: ['@api', '@userManagement']}, async ({}) => {
         const bearerToken = await authenticateAndGetBearerToken(userData);
-        await checkIfUserExistsByID(userID);
-        await deleteUserWithAPI(userID, bearerToken);
+        await checkIfUserExistsByID(userData);
+        await deleteUserWithAPI(userData, bearerToken);
+        await checkIfUserExistsByID(userData);
     });
 });

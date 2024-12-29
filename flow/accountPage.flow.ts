@@ -16,11 +16,11 @@ export class AccountPageFlow {
         await expect(this.accountPage.welcomeMessageLabel).toHaveText(`Hi ${userData.email}!`);
     }
 
-    async gotoMyProfileAndGetUserID(): Promise<string> {
+    async gotoMyProfileAndGetUserID(userData: UserDataInterface): Promise<void> {
         await this.accountPage.myProfileButton.click();
         await expect(this.page).toHaveURL(/user\.html\?id=\d+/);
         const userID = await getTextValueFromElement(this.accountPage.userIDLabel);
-        return userID;
+        userData.id = userID;
     }
 
     async verifyUserIDInURL(userID: string): Promise<void> {
