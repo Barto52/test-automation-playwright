@@ -30,7 +30,7 @@ test.describe('User Management', {tag: '@userManagement'}, () => {
         }
     });
 
-    test('Registers a new user via UI', {tag: ['@e2e', '@userManagement']}, async ({page}) => {
+    test('Register a new user via UI', {tag: ['@e2e', '@userManagement']}, async ({page}) => {
         const commonFlow = new CommonFlow(page);
         const registerPageFlow = new RegisterPageFlow(page);
 
