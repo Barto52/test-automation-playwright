@@ -14,14 +14,14 @@ jobs:
         steps:
             - uses: actions/checkout@v4
 
-            - name: Set up Docker Compose
+            - name: Set up Docker
               run: |
                   sudo apt-get update
-                  sudo apt-get install -y docker-compose
+                  sudo apt-get install -y docker.io
 
-            - name: Build Docker containers
+            - name: Pull Docker image and start container
               run: |
-                  docker-compose -f docker-compose.yml up -d --build
+                  docker run -d -p 3000:3000 jaktestowac/gad:latest
 
             - name: Wait for the app to start
               run: |
@@ -32,12 +32,13 @@ jobs:
 
             - name: Run Playwright tests
               run: |
-                  docker-compose run tests
+                  npx playwright test
 
-            - name: Tear down Docker Compose
+            - name: Tear down Docker container
               if: always()
               run: |
-                  docker-compose down
+                  docker ps -q --filter "ancestor=jaktestowac/gad:latest" | xargs docker stop
+                  docker ps -q --filter "ancestor=jaktestowac/gad:latest" | xargs docker rm
 
             - name: Upload Playwright test reports
               if: ${{ !cancelled() }}
