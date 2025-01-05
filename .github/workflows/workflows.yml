@@ -14,14 +14,14 @@ jobs:
         steps:
             - uses: actions/checkout@v4
 
-            - name: Setup Docker
+            - name: Set up Docker
               run: |
                   sudo apt-get update
                   sudo apt-get install -y docker.io
 
-            - name: Pull Docker image and start container (version 2.7.9)
+            - name: Run Docker container
               run: |
-                  docker run -d -p 3000:3000 jaktestowac/gad:2.7.9
+                  docker run -p 3000:3000 -d jaktestowac/gad:2.7.9
 
             - name: Wait for the app to start
               run: |
@@ -37,8 +37,8 @@ jobs:
             - name: Tear down Docker container
               if: always()
               run: |
-                  docker ps -q --filter "ancestor=jaktestowac/gad:2.7.9" | xargs docker stop
-                  docker ps -q --filter "ancestor=jaktestowac/gad:2.7.9" | xargs docker rm
+                  docker ps -q | xargs docker stop
+                  docker ps -q | xargs docker rm
 
             - name: Upload Playwright test reports
               if: ${{ !cancelled() }}
