@@ -1,4 +1,5 @@
 version: '3.9'
+
 services:
     app:
         build:
@@ -11,10 +12,12 @@ services:
         command: ['npm', 'run', 'start']
 
     tests:
-        image: mcr.microsoft.com/playwright:1.49
+        build:
+            context: .
+            dockerfile: Dockerfile
         depends_on:
             - app
-        working_dir: /tests
+        working_dir: /usr/src/app
         volumes:
-            - .:/tests
+            - .:/usr/src/app
         command: ['npx', 'playwright', 'test']

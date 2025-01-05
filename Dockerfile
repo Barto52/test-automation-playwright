@@ -5,11 +5,10 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 RUN npm install
+RUN npm install playwright@1.49
 
 COPY . .
 
 EXPOSE 3000
 
 CMD ["npm", "run", "start"]
-
-HEALTHCHECK --interval=10s --timeout=5s --start-period=30s --retries=3 CMD curl -f http://localhost:3000 || exit 1
