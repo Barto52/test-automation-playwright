@@ -19,7 +19,7 @@ jobs:
               run: |
                   docker run -p 3000:3000 -d jaktestowac/gad:2.7.9
 
-                  - name: Wait for the app to start
+            - name: Wait for the app to start
               run: |
                   docker exec -d bd67951758d9cf425166d41f2a47f56ee81fc24aa21397816cf8cd042d66e878 sh -c "apt-get update && apt-get install -y curl"
                   until curl -s http://localhost:3000; do
@@ -27,21 +27,20 @@ jobs:
                     sleep 5
                   done
 
+            - name: Run Playwright tests
+              run: |
+                  npx playwright test
 
-              - name: Run Playwright tests
-                run: |
-                    npx playwright test
+            - name: Tear down Docker container
+              if: always()
+              run: |
+                  docker ps -q | xargs docker stop 
+                  docker ps -q | xargs docker rm
 
-              - name: Tear down Docker container
-                if: always()
-                run: |
-                    docker ps -q | xargs docker stop 
-                    docker ps -q | xargs docker rm    
-
-              - name: Upload Playwright test reports
-                if: ${{ !cancelled() }}
-                uses: actions/upload-artifact@v4
-                with:
-                    name: playwright-report
-                    path: playwright-report/
-                    retention-days: 30
+            - name: Upload Playwright test reports
+              if: ${{ !cancelled() }}
+              uses: actions/upload-artifact@v4
+              with:
+                  name: playwright-report
+                  path: playwright-report/
+                  retention-days: 30
