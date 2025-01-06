@@ -60,3 +60,12 @@ jobs:
                   name: playwright-report
                   path: playwright-report/
                   retention-days: 30
+
+            - name: Save cache always
+              id: save-playwright-cache
+              if: always()
+              uses: actions/cache/save@v3
+              with:
+                  path: |
+                      ~/.cache/ms-playwright
+                  key: ${{ runner.os }}-playwright
