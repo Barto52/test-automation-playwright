@@ -3,6 +3,8 @@ import {Page} from '@playwright/test';
 export class LoginPage {
     constructor(private page: Page) {}
 
+    loginAlert = this.page.locator('[data-testid="login-error"]');
+
     loginButton = this.page.locator('#loginButton');
 
     keepMeSignInCheckbox = this.page.locator('#keepSignIn');
