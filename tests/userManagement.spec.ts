@@ -30,6 +30,17 @@ test.describe('User Management', {tag: '@userManagement'}, () => {
         }
     });
 
+    test('Login with an unregistered user', {tag: ['@e2e', '@userManagement']}, async ({page}) => {
+        const loginPageFlow = new LoginPageFlow(page);
+        const commonFlow = new CommonFlow(page);
+
+        await commonFlow.gotoHomepage();
+        await commonFlow.gotoLoginPageFromHeaderDropdown();
+        await loginPageFlow.verifyPageLabelsAndElements();
+        await loginPageFlow.fillLoginForm(userData);
+        await loginPageFlow.submitLoginAndVerifyAlertContent();
+    });
+
     test('Register a new user via UI', {tag: ['@e2e', '@userManagement']}, async ({page}) => {
         const commonFlow = new CommonFlow(page);
         const registerPageFlow = new RegisterPageFlow(page);
@@ -51,7 +62,7 @@ test.describe('User Management', {tag: '@userManagement'}, () => {
         await commonFlow.gotoLoginPageFromHeaderDropdown();
         await loginPageFlow.verifyPageLabelsAndElements();
         await loginPageFlow.fillLoginForm(userData);
-        await loginPageFlow.submitLoginForm();
+        await loginPageFlow.submitLoginAndRedirectToAccountPage();
         await accountPageFlow.verifyPageLabelVisibilityAndContent(userData);
 
         await accountPageFlow.gotoMyProfileAndGetUserID(userData);
