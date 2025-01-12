@@ -8,9 +8,21 @@ import {UserDataFactory} from '@_src/factory/generateUserData.factory';
 import {authenticateAndGetBearerToken, checkIfUserExistsByID, deleteUserWithAPI} from '@_src/helpers/api.helper';
 
 test.describe('User Management', {tag: '@userManagement'}, () => {
-    const userDataFactory = new UserDataFactory();
-    const userData = userDataFactory.generateUserData();
+    let userDataFactory;
+    let userData;
+    let loginPageFlow;
+    let commonFlow;
+    let registerPageFlow;
+    let accountPageFlow;
 
+    test.beforeAll(async ({page}) => {
+        userDataFactory = new UserDataFactory();
+        userData = userDataFactory.generateUserData();
+        loginPageFlow = new LoginPageFlow(page);
+        commonFlow = new CommonFlow(page);
+        registerPageFlow = new RegisterPageFlow(page);
+        accountPageFlow = new AccountPageFlow(page);
+    });
     test.afterAll(async () => {
         if (!userData.id) {
             console.info(`User does not exist, skipping "afterAll" cleanup.`);
@@ -30,10 +42,7 @@ test.describe('User Management', {tag: '@userManagement'}, () => {
         }
     });
 
-    test('Login with an unregistered user', {tag: ['@e2e', '@userManagement']}, async ({page}) => {
-        const loginPageFlow = new LoginPageFlow(page);
-        const commonFlow = new CommonFlow(page);
-
+    test('Login with an unregistered user', {tag: ['@e2e', '@userManagement']}, async ({}) => {
         await commonFlow.gotoHomepage();
         await commonFlow.gotoLoginPageFromHeaderDropdown();
         await loginPageFlow.verifyPageLabelsAndElements();
@@ -41,10 +50,7 @@ test.describe('User Management', {tag: '@userManagement'}, () => {
         await loginPageFlow.submitLoginAndVerifyAlertContent();
     });
 
-    test('Register a new user via UI', {tag: ['@e2e', '@userManagement']}, async ({page}) => {
-        const commonFlow = new CommonFlow(page);
-        const registerPageFlow = new RegisterPageFlow(page);
-
+    test('Register a new user via UI', {tag: ['@e2e', '@userManagement']}, async ({}) => {
         await commonFlow.gotoHomepage();
         await commonFlow.gotoRegisterPageFromHeaderDropdown();
         await registerPageFlow.verifyPageLabelsAndElements();
@@ -53,18 +59,13 @@ test.describe('User Management', {tag: '@userManagement'}, () => {
         await registerPageFlow.submitRegisterForm();
     });
 
-    test('Login with a registered user', {tag: ['@e2e', '@userManagement']}, async ({page}) => {
-        const loginPageFlow = new LoginPageFlow(page);
-        const commonFlow = new CommonFlow(page);
-        const accountPageFlow = new AccountPageFlow(page);
-
+    test('Login with a registered user', {tag: ['@e2e', '@userManagement']}, async ({}) => {
         await commonFlow.gotoHomepage();
         await commonFlow.gotoLoginPageFromHeaderDropdown();
         await loginPageFlow.verifyPageLabelsAndElements();
         await loginPageFlow.fillLoginForm(userData);
         await loginPageFlow.submitLoginAndRedirectToAccountPage();
         await accountPageFlow.verifyPageLabelVisibilityAndContent(userData);
-
         await accountPageFlow.gotoMyProfileAndGetUserID(userData);
         await accountPageFlow.verifyUserIDInURL(userData.id);
     });
