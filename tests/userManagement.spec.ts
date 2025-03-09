@@ -15,7 +15,7 @@ test.describe('User Management', {tag: '@userManagement'}, () => {
     let registerPageFlow;
     let accountPageFlow;
 
-    test.beforeAll(async ({page}) => {
+    test.beforeEach(async ({page}) => {
         userDataFactory = new UserDataFactory();
         userData = userDataFactory.generateUserData();
         loginPageFlow = new LoginPageFlow(page);
@@ -24,7 +24,7 @@ test.describe('User Management', {tag: '@userManagement'}, () => {
         accountPageFlow = new AccountPageFlow(page);
     });
     test.afterAll(async () => {
-        if (!userData.id) {
+        if (!userData.id || !userData.id) {
             console.info(`User does not exist, skipping "afterAll" cleanup.`);
         }
 
