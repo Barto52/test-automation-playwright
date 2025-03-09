@@ -42,7 +42,7 @@ test.describe('User Management', {tag: '@userManagement'}, () => {
         }
     });
 
-    test('Login with an unregistered user', {tag: ['@e2e', '@userManagement']}, async ({}) => {
+    test('Log in with an unregistered user', {tag: ['@e2e', '@userManagement']}, async ({}) => {
         await commonFlow.gotoHomepage();
         await commonFlow.gotoLoginPageFromHeaderDropdown();
         await loginPageFlow.verifyPageLabelsAndElements();
@@ -59,7 +59,7 @@ test.describe('User Management', {tag: '@userManagement'}, () => {
         await registerPageFlow.submitRegisterForm();
     });
 
-    test('Login with a registered user', {tag: ['@e2e', '@userManagement']}, async ({}) => {
+    test('Log in with a registered user', {tag: ['@e2e', '@userManagement']}, async ({}) => {
         await commonFlow.gotoHomepage();
         await commonFlow.gotoLoginPageFromHeaderDropdown();
         await loginPageFlow.verifyPageLabelsAndElements();
